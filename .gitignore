@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Node/Vite
+frontend/node_modules/
+frontend/dist/
+frontend/*.local
+
+# Local secrets
+.env
+backend/.env
+frontend/.env
+
+# Runtime output
+backend/cache/
+backend/logs/
+backend/uploads/
+backend/backend_output.log
+*.log
+
+# Local datasets can be large. Deploy them via Render disk, object storage,
+# or an explicit tracked data file if you choose that route.
+backend/data/*.csv
+backend/data/*.nc
+backend/data/*.grd
+backend/data/*.tif
+backend/data/*.tiff
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: indicli-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: APP_NAME
+        value: IndiCli
+      - key: APP_ENV
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: ALLOWED_ORIGINS
+        value: https://your-frontend-service.onrender.com
+      - key: MASTER_CSV_PATH
+        value: ./data/master_climate_dataset.csv.gz
+      - key: MODELS_DIR
+        value: ./models
+      - key: MODEL_SAVE_DIR
+        value: ./models
+      - key: UPLOAD_DIR
+        value: ./uploads
+      - key: CACHE_DIR
+        value: ./cache
+      - key: LOG_DIR
+        value: ./logs
+      - key: SECRET_KEY
+        generateValue: true
+
+  - type: web
+    name: indicli-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://your-backend-service.onrender.com
+      - key: VITE_API_TIMEOUT_MS
+        value: "30000"
+      - key: VITE_ML_API_TIMEOUT_MS
+        value: "120000"
+      - key: VITE_APP_NAME
+        value: IndiCli
